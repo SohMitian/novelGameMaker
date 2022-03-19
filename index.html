@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1VQRPPZMK0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1VQRPPZMK0');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="icon" href="img/icon.png">
+  <link rel="apple-touch-icon" href="img/icon.png">
+  <link rel="stylesheet" href="src/css/style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+  <title>ノベルゲーム画像メーカー</title>
+
+</head>
+
+<body>
+  <!-- As a heading -->
+  <nav class="navbar navbar-light bg-light mb-3">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">ノベルゲーム画像メーカー</span>
+    </div>
+  </nav>
+  <div class="container">
+    <header class="header text-center">
+      <div class="h1">ノベルゲーム画像メーカー</div>
+      <p>ノベルゲームの画像を作れます</p>
+    </header>
+    <main role="main">
+      <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+          <img class="img-fluid mb-5" id="sampleImage" src="./img/sample.png"alt="sample" />
+          <div class="h4">1.名前とセリフを入れる</div>
+          <form class="justify-content-center">
+            <!-- 名前とセリフ入力エリア -->
+            <div id="nameAndWords">
+              <!-- 名前 -->
+              <input class="form-control mb-2" id="nameText" type="text" rows="1"
+                placeholder="名前" maxlength="20" />
+              <!-- セリフ -->
+              <textarea cols="29" rows="4" class="form-control mb-4" id="wordsText" rows="2" placeholder="セリフ" maxlength="128"></textarea>
+              <!-- リセットボタン -->
+              <input type="reset" class="btn btn-outline-secondary mb-4" value="リセット">
+            </div>
+            <div class="h5">背景画像選択</div>
+            <div class="mb-4">
+              <input type="radio" name="bgImg" value="schoolCorridor1.jpg" checked>学校の廊下
+              <input type="radio" name="bgImg" value="classRoom1.jpg">教室
+            </div>
+            <div class="h5">人物画像選択</div>
+            <div class="mb-5">
+              <input type="radio" name="peopleImg" value="men1.png" checked>男性
+              <input type="radio" name="peopleImg" value="women1.png">女性
+              <input type="radio" name="peopleImg" value="men2.png">マッチョ
+              <input type="radio" name="peopleImg" value="women2.png">メイド
+            </div>
+            <!-- 画像生成エリア -->
+            <div id="imageGenerate">
+              <h4 class="mb-2">2.画像生成ボタンを押す</h4>
+              <p>セリフを書き換えて画像生成ボタンを押せば何度でも作り直せます</p>
+              <button class="btn btn-outline-primary mb-2" id="canvasView" type="button">画像生成
+              </button>
+            </div>
+          </form>
+
+          <canvas class="mb-4" id="canvas" width="" height=""></canvas>
+          <h4 class="m-2">3.画像を保存してツイートしよう！</h4>
+          <p>※スマートフォンの人は画像を長押しして保存してください。</p>
+          <button class="btn btn-success mb-4" id="saveBtn" type="button">画像保存</button>
+          <a class="btn btn-primary mb-4" href="https://twitter.com/intent/tweet?text=ノベルゲーム風画像を作ってみよう！%23ノベルゲーム画像メーカー%20https://novelgamemaker.app"
+            target="_blank">
+            <i class="bi bi-twitter"></i>
+            ツイートする
+          </a>
+          <!-- こういうの良くないからそのうち修正する -->
+          <br>
+          <br>
+        </div>
+        <div class="text-center">
+          運営者
+          <img src="/img/profImg.jpeg" alt="ソウ" width="30">
+          <a href="https://twitter.com/soh_mitian" target="_blank">
+            @soh_mitian
+          </a>
+          / 
+          <a href="https://marshmallow-qa.com/soh_0001?utm_medium=url_text&utm_source=promotion" target="_blank">質問や要望</a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="text-muted">©ノベルゲーム風画像メーカー</p>
+    </div>
+  </footer>
+  <script src="src/js/canvas.js"></script>
+  <script src="src/js/downloadImg.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+
+</html>
