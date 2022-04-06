@@ -1,3 +1,77 @@
+function resizeImg(imgData) {
+
+  //画像オブジェクトを生成
+  const canvas = document.createElement('canvas');
+  canvas.width = 800;
+  canvas.height = 800;
+  const ctx = canvas.getContext('2d');
+  ctx.fillRect(10, 210, 340, 80); 
+
+  var img = new Image();
+ 
+
+  img.onload = (event) => {
+    ctx.drawImage(img, 0, 0);
+    return canvas.toDataURL();
+  }
+  img.src = imgData;
+}
+
+// document.querySelector('#selectBgImg').addEventListener('change', (event) => {
+//   const file = event.target.files[0]
+//   if (!file) return
+  
+//   const reader = new FileReader()
+//   reader.onload = (event) => {
+//     imgData = event.target.result
+
+//     const img = new Image();
+//     img.onload = () => {
+//       const orgWidth  = img.width;  // 元の横幅を保存
+//       const orgHeight = img.height; // 元の高さを保存
+//       const newWidth = 360;  // 横幅を360pxにリサイズ
+//       const newHeight = orgHeight * (newWidth / orgWidth); // 高さを横幅の変化割合に合わせる
+//       //画像オブジェクトを生成
+//       const canvas = document.createElement('canvas');
+//       canvas.width = newWidth;
+//       canvas.height = newHeight;
+//       const ctx = canvas.getContext('2d');
+//       ctx.drawImage(img, 0, 0, newWidth, newHeight);
+//       document.querySelector('#bgImg').src = canvas.toDataURL()
+//     }
+//     img.src = imgData;
+//   }
+//   reader.readAsDataURL(file)
+// })
+
+
+document.querySelector('#selectPeopleImg').addEventListener('change', (event) => {
+  const file = event.target.files[0]
+  if (!file) return
+  
+  const reader = new FileReader()
+  reader.onload = (event) => {
+    imgData = event.target.result
+
+    const img = new Image();
+    img.onload = () => {
+      const orgWidth  = img.width;  // 元の横幅を保存
+      const orgHeight = img.height; // 元の高さを保存
+      const newWidth = 300;  // 横幅を300pxにリサイズ
+      const newHeight = orgHeight * (newWidth / orgWidth); // 高さを横幅の変化割合に合わせる
+      //画像オブジェクトを生成
+      const canvas = document.createElement('canvas');
+      canvas.width = newWidth;
+      canvas.height = newHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, newWidth, newHeight);
+      document.querySelector('#peopleImg').src = canvas.toDataURL()
+    }
+    img.src = imgData;
+  }
+  reader.readAsDataURL(file)
+})
+
 const canvasView = document.getElementById("canvasView");
 canvasView.addEventListener("click", function () {
   // 名前取得
@@ -16,24 +90,25 @@ canvasView.addEventListener("click", function () {
   }else{
     words = wordsText.value;
   }
-    // 背景選択取得
-    let selectBgImg = document.getElementsByName('bgImg');
-    let bgImg;
 
-    for (let i = 0; i < selectBgImg.length; i++){
-        if (selectBgImg.item(i).checked){
-          bgImg = selectBgImg.item(i).value;
-        }
-    }
-      // 人物選択取得
-      let selectPeopleImg = document.getElementsByName('peopleImg');
-      let peopleImg;
-
-      for (let i = 0; i < selectPeopleImg.length; i++){
-          if (selectPeopleImg.item(i).checked){
-            peopleImg = selectPeopleImg.item(i).value;
-          }
+  // 背景選択取得
+  let selectBgImg = document.getElementsByName('bgImg');
+  let bgImg
+  for (let i = 0; i < selectBgImg.length; i++){
+      if (selectBgImg.item(i).checked){
+        bgImg = selectBgImg.item(i).value;
       }
+  }
+
+  // 人物選択取得
+  const peopleImg = new Image();
+  peopleImg.src = document.getElementById('peopleImg').src;
+
+  // for (let i = 0; i < selectPeopleImg.length; i++){
+  //     if (selectPeopleImg.item(i).checked){
+  //       peopleImg = selectPeopleImg.item(i).value;
+  //     }
+  // }
 
 
   // 改行
@@ -59,13 +134,10 @@ canvasView.addEventListener("click", function () {
         kaigyouBody.push(tmp[key]);
       }
     }
-
-}
+  }
 
 
   var result = kaigyouBody.join("\n");
-console.log(bgImg)
-console.log(peopleImg)
 
   // キャンバスの取得
   const canvas = document.getElementById("canvas");
@@ -78,8 +150,7 @@ console.log(peopleImg)
   // 画像のパス
   const directory = "./img/";
   const srcs = [
-    bgImg,
-    peopleImg,
+    bgImg
     // "balloon.png",
     // "name_balloon.png",
   ];
@@ -95,7 +166,9 @@ console.log(peopleImg)
         // 背景
         ctx.drawImage(imageList[0], 0, 0, imageList[0].width / 2, imageList[0].height / 2);
         // 人影
-        ctx.drawImage(imageList[1], 110, 50, imageList[1].width / 1.5, imageList[1].height / 1.5);
+        const newPeopleImg = new Image();
+
+        ctx.drawImage(peopleImg, 110, 50, peopleImg.width / 1.5, peopleImg.height / 1.5);
         // 吹き出し
         ctx.beginPath();
         ctx.fillStyle = "rgba(" + [255, 255, 255, 0.8] + ")";
