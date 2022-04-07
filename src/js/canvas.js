@@ -140,7 +140,7 @@ canvasView.addEventListener("click", function () {
   var result = kaigyouBody.join("\n");
 
   // キャンバスの取得
-  const canvas = document.getElementById("canvas");
+  const canvas = document.createElement('canvas');
   const canvasWidth = 360;
   const canvasHeight = 300;
   canvas.width = canvasWidth;
@@ -204,6 +204,7 @@ canvasView.addEventListener("click", function () {
 
           ctx.fillText( line, x + 0, y + addY ) ;
         }
+        document.querySelector('#canvas').src = canvas.toDataURL()
       }
       loadedCount++;
     };
