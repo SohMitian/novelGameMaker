@@ -204,6 +204,7 @@ canvasView.addEventListener("click", function () {
 
           ctx.fillText( line, x + 0, y + addY ) ;
         }
+        canvas.crossOrigin = 'Anonymous';
         document.querySelector('#canvas').src = canvas.toDataURL()
       }
       loadedCount++;
